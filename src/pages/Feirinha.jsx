@@ -90,7 +90,7 @@ export default function Feirinha() {
         )
     );
 
-    if (loading) return <p>Carregando clientes...</p>;
+    if (loading) return <p className="p-4">Carregando clientes...</p>;
 
     return (
         <div className="p-4 sm:p-6 max-w-screen-xl mx-auto">
@@ -100,7 +100,7 @@ export default function Feirinha() {
                 <input
                     type="text"
                     placeholder="Buscar cliente..."
-                    className="p-2 pl-10 border border-gray-300 rounded-md w-full focus:ring-blue-500 focus:border-blue-500"
+                    className="p-2 pl-9 text-sm border border-gray-300 rounded-md w-full focus:ring-blue-500 focus:border-blue-500"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -117,7 +117,7 @@ export default function Feirinha() {
                         <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" className="px-4 py-3 border border-gray-300">Nome</th>
-                                <th scope="col" className="px-2 py-1 border border-gray-300 hidden sm:table-cell min-w-[7.5rem] whitespace-nowrap">CPF</th> {/* AQUI: Ajustes na largura do cabeçalho CPF */}
+                                <th scope="col" className="px-2 py-1 border border-gray-300 hidden sm:table-cell min-w-[7.5rem] whitespace-nowrap">CPF</th>
                                 <th scope="col" className="px-4 py-3 border border-gray-300">Contato</th>
                                 <th scope="col" className="px-4 py-3 border border-gray-300 hidden md:table-cell">Número</th>
                                 <th scope="col" className="px-4 py-3 border border-gray-300 hidden lg:table-cell">Usuário PPPoE</th>
@@ -133,7 +133,7 @@ export default function Feirinha() {
                             {filteredClientes.map((cliente) => (
                                 <tr key={cliente.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border border-gray-300">{cliente.nome}</td>
-                                    <td className="px-2 py-1 border border-gray-300 hidden sm:table-cell whitespace-nowrap">{cliente.cpf}</td> {/* AQUI: Ajustes na largura da célula CPF */}
+                                    <td className="px-2 py-1 border border-gray-300 hidden sm:table-cell whitespace-nowrap">{cliente.cpf}</td>
                                     <td className="px-4 py-3 border border-gray-300">{cliente.contato}</td>
                                     <td className="px-4 py-3 border border-gray-300 hidden md:table-cell">{cliente.numero}</td>
                                     <td className="px-4 py-3 border border-gray-300 hidden lg:table-cell">{cliente.pppoe}</td>
@@ -174,20 +174,21 @@ export default function Feirinha() {
                                         >
                                             <FaTrashAlt className="w-4 h-4" />
                                         </button>
+                                        {/* Botão de Status com Ícones - Lógica de cores e ícones ajustada */}
                                         <button
                                             onClick={() => toggleStatus(cliente)}
                                             className={`p-2 rounded focus:outline-none focus:ring-2 focus:ring-offset-2
                                                 ${cliente.status === "ativado"
-                                                    ? "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500"
-                                                    : "bg-green-500 text-white hover:bg-green-600 focus:ring-green-500"
+                                                    ? "bg-green-500 text-white hover:bg-green-600 focus:ring-green-500" // Se está ATIVADO, mostra VERDE (✓)
+                                                    : "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500" // Se está DESATIVADO, mostra VERMELHO (✕)
                                                 }
                                             `}
                                             title={cliente.status === "ativado" ? "Desativar Cliente" : "Ativar Cliente"}
                                         >
                                             {cliente.status === "ativado" ? (
-                                                <FaTimes className="w-4 h-4" />
+                                                <FaCheck className="w-4 h-4" /> // Se está ATIVADO, mostra o CHECK (✓)
                                             ) : (
-                                                <FaCheck className="w-4 h-4" />
+                                                <FaTimes className="w-4 h-4" /> // Se está DESATIVADO, mostra o X (✕)
                                             )}
                                         </button>
                                     </td>

@@ -178,21 +178,21 @@ export default function Residencia() {
                                         >
                                             <FaTrashAlt className="w-4 h-4" />
                                         </button>
-                                        {/* Botão de Status com Ícones */}
+                                        {/* Botão de Status com Ícones - Lógica de cores e ícones invertida */}
                                         <button
                                             onClick={() => toggleStatus(cliente)}
                                             className={`p-2 rounded focus:outline-none focus:ring-2 focus:ring-offset-2
                                                 ${cliente.status === "ativado"
-                                                    ? "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500" // Vermelho para "Desativar" (X)
-                                                    : "bg-green-500 text-white hover:bg-green-600 focus:ring-green-500" // Verde para "Ativar" (Check)
+                                                    ? "bg-green-500 text-white hover:bg-green-600 focus:ring-green-500" // Se está ATIVADO, mostra VERDE (✓) para a ação de ATIVAR (o status futuro)
+                                                    : "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500" // Se está DESATIVADO, mostra VERMELHO (✕) para a ação de DESATIVAR (o status futuro)
                                                 }
                                             `}
                                             title={cliente.status === "ativado" ? "Desativar Cliente" : "Ativar Cliente"}
                                         >
                                             {cliente.status === "ativado" ? (
-                                                <FaTimes className="w-4 h-4" /> // Mostra X quando o status é "ativado" (para desativar)
+                                                <FaCheck className="w-4 h-4" /> // Se está ATIVADO, mostra o CHECK (✓)
                                             ) : (
-                                                <FaCheck className="w-4 h-4" /> // Mostra Check quando o status é "desativado" (para ativar)
+                                                <FaTimes className="w-4 h-4" /> // Se está DESATIVADO, mostra o X (✕)
                                             )}
                                         </button>
                                     </td>
