@@ -62,6 +62,15 @@ export default function Layout() {
                     📊 Dashboard
                 </NavLink>
                 <NavLink
+                    to="/buscar-clientes"
+                    className={({ isActive }) =>
+                        "mb-4 px-3 py-2 rounded " + (isActive ? "bg-green-600 text-white" : "text-gray-700 hover:bg-green-100")
+                    }
+                >
+                    🔍 Buscar Clientes
+                </NavLink>
+
+                <NavLink
                     to="/feirinha"
                     className={({ isActive }) =>
                         "mb-4 px-3 py-2 rounded " + (isActive ? "bg-green-600 text-white" : "text-gray-700 hover:bg-green-100")

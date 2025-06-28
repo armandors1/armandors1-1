@@ -8,6 +8,7 @@ import EditarCliente from "./pages/EditarCliente";
 import Login from "./pages/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "./contexts/AuthContext";
+import BuscaClientes from "./pages/BuscaClientes";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="feirinha" element={<Feirinha />} />
             <Route path="residencia" element={<Residencia />} />
             <Route path="cadastro" element={<Cadastro />} />
+            <Route path="/buscar-clientes" element={<BuscaClientes />} />
           </Route>
         </Routes>
       </Router>
