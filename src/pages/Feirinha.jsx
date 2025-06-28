@@ -96,7 +96,7 @@ export default function Feirinha() {
         <div className="p-4 sm:p-6 max-w-screen-xl mx-auto">
             <h1 className="text-2xl sm:text-3xl font-bold mb-4">Clientes da Feirinha</h1>
 
-            <div className="mb-4 relative">
+            <div className="mb-4 relative w-full sm:w-1/2 lg:w-1/3">
                 <input
                     type="text"
                     placeholder="Buscar cliente..."
@@ -104,7 +104,7 @@ export default function Feirinha() {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm" />
             </div>
 
             {filteredClientes.length === 0 && searchTerm !== "" ? (
