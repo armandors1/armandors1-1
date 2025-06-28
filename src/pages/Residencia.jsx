@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "../firebaseConfig"; // Ensure this path is correct
 import { useNavigate } from "react-router-dom";
 import { FaEdit, FaTrashAlt, FaSearch, FaCheck, FaTimes } from "react-icons/fa"; // Importando os ícones necessários
 
