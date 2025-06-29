@@ -17,7 +17,11 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
+          {/* 🔓 Rotas públicas */}
           <Route path="/login" element={<Login />} />
+          <Route path="/solicitar-internet" element={<SolicitarInternet />} />
+
+          {/* 🔒 Rotas protegidas */}
           <Route
             path="/editar/:id/:origem"
             element={
@@ -26,6 +30,16 @@ function App() {
               </PrivateRoute>
             }
           />
+
+          <Route
+            path="/gerar-link"
+            element={
+              <PrivateRoute>
+                <QrGeneratorTool />
+              </PrivateRoute>
+            }
+          />
+
           <Route
             path="/"
             element={
@@ -38,9 +52,7 @@ function App() {
             <Route path="feirinha" element={<Feirinha />} />
             <Route path="residencia" element={<Residencia />} />
             <Route path="cadastro" element={<Cadastro />} />
-            <Route path="/buscar-clientes" element={<BuscaClientes />} />
-            <Route path="/solicitar-internet" element={<SolicitarInternet />} />
-            <Route path="/gerar-link" element={<QrGeneratorTool />} />
+            <Route path="buscar-clientes" element={<BuscaClientes />} />
           </Route>
         </Routes>
       </Router>
@@ -48,4 +60,4 @@ function App() {
   );
 }
 
-export default App; // ESSA LINHA É ESSENCIAL
+export default App;

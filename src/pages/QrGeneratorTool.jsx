@@ -18,7 +18,7 @@ const QrGeneratorTool = () => {
         try {
             new URL(formUrl); // Validação básica de URL
         } catch (e) {
-            setErrorMessage('Por favor, insira um URL válido (ex: https://provedor-two.vercel.app).');
+            setErrorMessage('Por favor, insira um URL válido (ex:https://provedor-two.vercel.app).');
             return;
         }
     };
