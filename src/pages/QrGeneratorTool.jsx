@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import QRCode from 'react-qr-code';
 
 const QrGeneratorTool = () => {
-    const [formUrl, setFormUrl] = useState('http://localhost:5173/solicitar-internet');
+    const [formUrl, setFormUrl] = useState('https://provedor-two.vercel.app/solicitar-internet');
     const [errorMessage, setErrorMessage] = useState('');
     const [copySuccess, setCopySuccess] = useState('');
 
@@ -18,7 +18,7 @@ const QrGeneratorTool = () => {
         try {
             new URL(formUrl); // Validação básica de URL
         } catch (e) {
-            setErrorMessage('Por favor, insira um URL válido (ex: http://localhost:5173/login).');
+            setErrorMessage('Por favor, insira um URL válido (ex: https://provedor-two.vercel.app).');
             return;
         }
     };
@@ -62,7 +62,7 @@ const QrGeneratorTool = () => {
                             value={formUrl}
                             onChange={(e) => setFormUrl(e.target.value)}
                             className="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-200 border-gray-300"
-                            placeholder="Ex: http://localhost:5173/solicitar-internet"
+                            placeholder="Ex: https://provedor-two.vercel.app/solicitar-internet"
                             aria-label="URL do Formulário"
                         />
                     </div>
