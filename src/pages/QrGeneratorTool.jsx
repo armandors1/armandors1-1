@@ -16,7 +16,7 @@ const QrGeneratorTool = () => {
         }
 
         try {
-            new URL(formUrl); // Basic URL validation
+            new URL(formUrl); // Validação básica de URL
         } catch (e) {
             setErrorMessage('Por favor, insira um URL válido (ex: https://provedor-two.vercel.app).');
             return;
@@ -30,15 +30,15 @@ const QrGeneratorTool = () => {
                 setTimeout(() => setCopySuccess(''), 2000);
             })
             .catch(err => {
-                console.error('Failed to copy: ', err);
+                console.error('Falha ao copiar: ', err);
                 setCopySuccess('Falha ao copiar o link.');
                 setTimeout(() => setCopySuccess(''), 2000);
             });
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 flex items-center justify-center p-4 font-inter">
-            <div className="bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-xl lg:max-w-2xl transform transition-all duration-300 hover:scale-[1.01] mx-auto">
+        <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 flex items-center justify-center p-4 sm:p-6 md:p-8 font-inter"> {/* Aumentando o padding geral da página */}
+            <div className="bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-lg lg:max-w-3xl transform transition-all duration-300 hover:scale-[1.01] mx-auto"> {/* Aumentando o max-w do container principal */}
                 <h1 className="text-3xl sm:text-4xl font-extrabold text-center text-purple-800 mb-6 border-b-4 border-purple-300 pb-2">
                     Gerador de Link e QR Code
                 </h1>
@@ -99,9 +99,14 @@ const QrGeneratorTool = () => {
 
                             <div>
                                 <label className="block text-gray-700 text-sm font-bold mb-2">QR Code para Escanear:</label>
-                                {/* Maximize QR code size on mobile */}
-                                <div className="mx-auto w-full max-w-[200px] sm:max-w-[256px] md:max-w-[300px] p-4 bg-white border-2 border-purple-200 rounded-lg shadow-md flex justify-center items-center">
-                                    <QRCode value={formUrl} size={256} className="w-full h-auto" level="H" />
+                                {/* Aumentando o tamanho do QR Code */}
+                                <div className="mx-auto w-fit p-4 bg-white border-2 border-purple-200 rounded-lg shadow-md flex justify-center items-center">
+                                    <QRCode
+                                        value={formUrl}
+                                        size={256} // Tamanho intrínseco maior para o SVG
+                                        className="w-full h-auto max-w-[192px] sm:max-w-[224px] md:max-w-[256px]" // Limites responsivos para o QR Code
+                                        level="H"
+                                    />
                                 </div>
                             </div>
                         </div>
