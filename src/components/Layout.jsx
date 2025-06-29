@@ -97,6 +97,27 @@ export default function Layout() {
                 >
                     📝 Cadastro
                 </NavLink>
+                <NavLink
+                    to="/solicitar-internet"
+                    className={({ isActive }) =>
+                        "mb-4 px-3 py-2 rounded " +
+                        (isActive ? "bg-green-600 text-white" : "text-gray-700 hover:bg-green-100")
+                    }
+                    onClick={() => setIsSidebarOpen(false)}
+                >
+                    🌐 Solicitar Internet
+                </NavLink>
+                <NavLink
+                    to="/gerar-link"
+                    className={({ isActive }) =>
+                        "mb-4 px-3 py-2 rounded " +
+                        (isActive ? "bg-purple-600 text-white" : "text-gray-700 hover:bg-purple-100")
+                    }
+                >
+                    📎 Gerar Link/QR
+                </NavLink>
+
+
 
                 <button
                     onClick={handleLogout}

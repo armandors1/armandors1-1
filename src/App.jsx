@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import BuscaClientes from "./pages/BuscaClientes";
+import SolicitarInternet from './pages/SolicitarInternet';
+import QrGeneratorTool from './pages/QrGeneratorTool';
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
             <Route path="residencia" element={<Residencia />} />
             <Route path="cadastro" element={<Cadastro />} />
             <Route path="/buscar-clientes" element={<BuscaClientes />} />
+            <Route path="/solicitar-internet" element={<SolicitarInternet />} />
+            <Route path="/gerar-link" element={<QrGeneratorTool />} />
           </Route>
         </Routes>
       </Router>
