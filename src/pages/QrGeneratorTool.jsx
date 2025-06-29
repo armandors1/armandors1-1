@@ -37,24 +37,25 @@ const QrGeneratorTool = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 flex items-center justify-center p-4 sm:p-6 md:p-8 font-inter"> {/* Aumentando o padding geral da página */}
-            <div className="bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-lg lg:max-w-3xl transform transition-all duration-300 hover:scale-[1.01] mx-auto"> {/* Aumentando o max-w do container principal */}
-                <h1 className="text-3xl sm:text-4xl font-extrabold text-center text-purple-800 mb-6 border-b-4 border-purple-300 pb-2">
+        <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 flex items-center justify-center p-2 sm:p-4 md:p-8 font-inter">
+            {/* Reduced horizontal padding on mobile (px-4) */}
+            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-xl shadow-2xl w-full max-w-none sm:max-w-xl lg:max-w-3xl transform transition-all duration-300 hover:scale-[1.01] mx-auto px-4 sm:px-6 md:px-8">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center text-purple-800 mb-4 sm:mb-6 border-b-4 border-purple-300 pb-2">
                     Gerador de Link e QR Code
                 </h1>
-                <p className="text-center text-gray-700 mb-8 text-base sm:text-lg">
+                <p className="text-center text-gray-700 mb-6 sm:mb-8 text-sm sm:text-base md:text-lg">
                     Cole o URL do seu formulário de solicitação de internet abaixo para gerar um QR Code e um link fácil de compartilhar com seus clientes.
                 </p>
 
                 {errorMessage && (
-                    <div className="p-4 mb-6 rounded-lg text-center font-semibold bg-red-100 text-red-800 border border-red-300">
+                    <div className="p-3 mb-4 rounded-lg text-center font-semibold bg-red-100 text-red-800 border border-red-300 text-sm">
                         {errorMessage}
                     </div>
                 )}
 
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
                     <div>
-                        <label htmlFor="formUrl" className="block text-gray-700 text-sm font-bold mb-2">
+                        <label htmlFor="formUrl" className="block text-gray-700 text-xs sm:text-sm font-bold mb-2">
                             URL do Formulário de Solicitação <span className="text-red-500">*</span>
                         </label>
                         <input
@@ -62,16 +63,16 @@ const QrGeneratorTool = () => {
                             id="formUrl"
                             value={formUrl}
                             onChange={(e) => setFormUrl(e.target.value)}
-                            className="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-200 border-gray-300"
+                            className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-400 transition duration-200 border-gray-300 text-sm"
                             placeholder="Ex: https://provedor-two.vercel.app/solicitar-internet"
                             aria-label="URL do Formulário"
                         />
                     </div>
 
-                    <div className="flex justify-center mt-6">
+                    <div className="flex justify-center mt-4">
                         <button
                             onClick={handleGenerate}
-                            className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-4 focus:ring-purple-300"
+                            className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 sm:py-3 sm:px-8 rounded-full shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-4 focus:ring-purple-300 text-sm sm:text-base"
                             aria-label="Gerar QR Code e Link"
                         >
                             Gerar QR Code e Link
@@ -79,32 +80,33 @@ const QrGeneratorTool = () => {
                     </div>
 
                     {formUrl && !errorMessage && (
-                        <div className="mt-8 text-center bg-gray-50 p-6 rounded-lg shadow-inner">
-                            <h2 className="text-2xl font-bold text-purple-700 mb-4 border-b border-purple-200 pb-2">Seu Link e QR Code</h2>
+                        <div className="mt-6 sm:mt-8 text-center bg-gray-50 p-4 sm:p-6 rounded-lg shadow-inner">
+                            <h2 className="text-xl sm:text-2xl font-bold text-purple-700 mb-3 sm:mb-4 border-b border-purple-200 pb-2">Seu Link e QR Code</h2>
 
-                            <div className="mb-6">
-                                <label className="block text-gray-700 text-sm font-bold mb-2">Link para Compartilhar:</label>
-                                <div className="flex flex-col sm:flex-row items-center justify-center bg-white border border-gray-300 rounded-lg p-3 break-words overflow-hidden">
-                                    <span className="text-blue-600 text-lg font-medium mb-2 sm:mb-0 sm:mr-4 w-full break-all">{formUrl}</span>
+                            <div className="mb-5 sm:mb-6">
+                                <label className="block text-gray-700 text-xs sm:text-sm font-bold mb-2">Link para Compartilhar:</label>
+                                <div className="flex flex-col sm:flex-row items-center justify-center bg-white border border-gray-300 rounded-lg p-2 sm:p-3 break-words overflow-hidden">
+                                    <span className="text-blue-600 text-sm sm:text-lg font-medium mb-2 sm:mb-0 sm:mr-4 w-full break-all">{formUrl}</span>
                                     <button
                                         onClick={handleCopy}
-                                        className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                        className="w-full sm:w-auto px-3 py-1 sm:px-4 sm:py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
                                         aria-label="Copiar Link"
                                     >
                                         Copiar
                                     </button>
                                 </div>
-                                {copySuccess && <p className="text-green-600 text-sm mt-2">{copySuccess}</p>}
+                                {copySuccess && <p className="text-green-600 text-xs sm:text-sm mt-2">{copySuccess}</p>}
                             </div>
 
                             <div>
-                                <label className="block text-gray-700 text-sm font-bold mb-2">QR Code para Escanear:</label>
-                                {/* Aumentando o tamanho do QR Code */}
-                                <div className="mx-auto w-fit p-4 bg-white border-2 border-purple-200 rounded-lg shadow-md flex justify-center items-center">
+                                <label className="block text-gray-700 text-xs sm:text-sm font-bold mb-2">QR Code para Escanear:</label>
+                                {/* Adjusted max-w for better mobile filling */}
+                                <div className="mx-auto w-full p-2 bg-white border-2 border-purple-200 rounded-lg shadow-md flex justify-center items-center overflow-hidden">
                                     <QRCode
                                         value={formUrl}
-                                        size={256} // Tamanho intrínseco maior para o SVG
-                                        className="w-full h-auto max-w-[192px] sm:max-w-[224px] md:max-w-[256px]" // Limites responsivos para o QR Code
+                                        size={512}
+                                        // Simplified max-width to allow more filling on small screens
+                                        className="w-full h-auto max-w-full"
                                         level="H"
                                     />
                                 </div>
