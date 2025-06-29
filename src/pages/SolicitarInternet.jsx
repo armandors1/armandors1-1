@@ -281,17 +281,17 @@ const App = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4 font-inter">
-            <div className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-4xl transform transition-all duration-300 hover:scale-[1.01]">
-                <h1 className="text-4xl font-extrabold text-center text-blue-800 mb-6 border-b-4 border-blue-300 pb-2">
+            <div className="bg-white p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-4xl transform transition-all duration-300 hover:scale-[1.01]">
+                <h1 className="text-3xl sm:text-4xl font-extrabold text-center text-blue-800 mb-4 sm:mb-6 border-b-4 border-blue-300 pb-2">
                     Solicitação de Internet
                 </h1>
-                <p className="text-center text-gray-700 mb-8 text-lg">
+                <p className="text-center text-gray-700 mb-6 sm:mb-8 text-base sm:text-lg">
                     Preencha o formulário abaixo para solicitar um orçamento ou demonstrar interesse em nossos planos de internet. Entraremos em contato o mais breve possível!
                 </p>
 
                 {submissionMessage && (
                     <div
-                        className={`p-4 mb-6 rounded-lg text-center font-semibold ${submissionMessage.includes('sucesso')
+                        className={`p-4 mb-6 rounded-lg text-center font-semibold text-sm sm:text-base ${submissionMessage.includes('sucesso')
                             ? 'bg-green-100 text-green-800 border border-green-300'
                             : 'bg-red-100 text-red-800 border border-red-300'
                             }`}
@@ -302,9 +302,9 @@ const App = () => {
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Seção Dados Pessoais */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                         <div>
-                            <label htmlFor="nomeCompleto" className="block text-gray-700 text-sm font-bold mb-2">
+                            <label htmlFor="nomeCompleto" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                                 Nome Completo <span className="text-red-500">*</span>
                             </label>
                             <input
@@ -313,7 +313,7 @@ const App = () => {
                                 name="nomeCompleto"
                                 value={formData.nomeCompleto}
                                 onChange={handleChange}
-                                className={`shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ${errors.nomeCompleto ? 'border-red-500' : 'border-gray-300'
+                                className={`shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 text-sm sm:text-base ${errors.nomeCompleto ? 'border-red-500' : 'border-gray-300'
                                     }`}
                                 placeholder="Seu nome completo"
                                 aria-label="Nome Completo"
@@ -322,7 +322,7 @@ const App = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="cpf" className="block text-gray-700 text-sm font-bold mb-2">
+                            <label htmlFor="cpf" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                                 CPF <span className="text-red-500">*</span>
                             </label>
                             <input
@@ -331,7 +331,7 @@ const App = () => {
                                 name="cpf"
                                 value={formData.cpf}
                                 onChange={handleChange}
-                                className={`shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ${errors.cpf ? 'border-red-500' : 'border-gray-300'
+                                className={`shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 text-sm sm:text-base ${errors.cpf ? 'border-red-500' : 'border-gray-300'
                                     }`}
                                 placeholder="000.000.000-00 (apenas números)"
                                 aria-label="CPF"
@@ -341,9 +341,9 @@ const App = () => {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                         <div>
-                            <label htmlFor="telefone" className="block text-gray-700 text-sm font-bold mb-2">
+                            <label htmlFor="telefone" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                                 Telefone <span className="text-red-500">*</span>
                             </label>
                             <input
@@ -352,7 +352,7 @@ const App = () => {
                                 name="telefone"
                                 value={formData.telefone}
                                 onChange={handleChange}
-                                className={`shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ${errors.telefone ? 'border-red-500' : 'border-gray-300'
+                                className={`shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 text-sm sm:text-base ${errors.telefone ? 'border-red-500' : 'border-gray-300'
                                     }`}
                                 placeholder="(XX) 9XXXX-XXXX (apenas números)"
                                 aria-label="Telefone"
@@ -362,7 +362,7 @@ const App = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
+                            <label htmlFor="email" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                                 E-mail <span className="text-red-500">*</span>
                             </label>
                             <input
@@ -371,7 +371,7 @@ const App = () => {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className={`shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ${errors.email ? 'border-red-500' : 'border-gray-300'
+                                className={`shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 text-sm sm:text-base ${errors.email ? 'border-red-500' : 'border-gray-300'
                                     }`}
                                 placeholder="seuemail@exemplo.com"
                                 aria-label="E-mail"
@@ -381,9 +381,9 @@ const App = () => {
                     </div>
 
                     {/* Seção Tipo de Local */}
-                    <h2 className="text-2xl font-bold text-blue-700 mt-8 mb-4 border-b border-blue-200 pb-2">Tipo de Local</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-blue-700 mt-6 sm:mt-8 mb-3 sm:mb-4 border-b border-blue-200 pb-2">Tipo de Local</h2>
                     <div>
-                        <label htmlFor="tipoLocal" className="block text-gray-700 text-sm font-bold mb-2">
+                        <label htmlFor="tipoLocal" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                             Onde será a instalação? <span className="text-red-500">*</span>
                         </label>
                         <select
@@ -391,7 +391,7 @@ const App = () => {
                             name="tipoLocal"
                             value={formData.tipoLocal}
                             onChange={handleChange}
-                            className={`shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ${errors.tipoLocal ? 'border-red-500' : 'border-gray-300'
+                            className={`shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 text-sm sm:text-base ${errors.tipoLocal ? 'border-red-500' : 'border-gray-300'
                                 }`}
                             aria-label="Tipo de Local"
                         >
@@ -405,10 +405,10 @@ const App = () => {
                     {/* Seção Endereço Condicional - Residência */}
                     {formData.tipoLocal === 'residencia' && (
                         <>
-                            <h2 className="text-2xl font-bold text-blue-700 mt-8 mb-4 border-b border-blue-200 pb-2">Endereço da Residência</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <h2 className="text-xl sm:text-2xl font-bold text-blue-700 mt-6 sm:mt-8 mb-3 sm:mb-4 border-b border-blue-200 pb-2">Endereço da Residência</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                                 <div>
-                                    <label htmlFor="rua" className="block text-gray-700 text-sm font-bold mb-2">
+                                    <label htmlFor="rua" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                                         Rua <span className="text-red-500">*</span>
                                     </label>
                                     <input
@@ -417,7 +417,7 @@ const App = () => {
                                         name="rua"
                                         value={formData.rua}
                                         onChange={handleChange}
-                                        className={`shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ${errors.rua ? 'border-red-500' : 'border-gray-300'
+                                        className={`shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 text-sm sm:text-base ${errors.rua ? 'border-red-500' : 'border-gray-300'
                                             }`}
                                         placeholder="Nome da rua"
                                         aria-label="Rua"
@@ -425,7 +425,7 @@ const App = () => {
                                     {errors.rua && <p className="text-red-500 text-xs italic mt-1">{errors.rua}</p>}
                                 </div>
                                 <div>
-                                    <label htmlFor="numero" className="block text-gray-700 text-sm font-bold mb-2">
+                                    <label htmlFor="numero" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                                         Número <span className="text-red-500">*</span>
                                     </label>
                                     <input
@@ -434,7 +434,7 @@ const App = () => {
                                         name="numero"
                                         value={formData.numero}
                                         onChange={handleChange}
-                                        className={`shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ${errors.numero ? 'border-red-500' : 'border-gray-300'
+                                        className={`shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 text-sm sm:text-base ${errors.numero ? 'border-red-500' : 'border-gray-300'
                                             }`}
                                         placeholder="Número da casa"
                                         aria-label="Número"
@@ -443,9 +443,9 @@ const App = () => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                                 <div>
-                                    <label htmlFor="complemento" className="block text-gray-700 text-sm font-bold mb-2">
+                                    <label htmlFor="complemento" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                                         Apartamento / Bloco (Opcional)
                                     </label>
                                     <input
@@ -454,13 +454,13 @@ const App = () => {
                                         name="complemento"
                                         value={formData.complemento}
                                         onChange={handleChange}
-                                        className="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 border-gray-300"
+                                        className="shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 border-gray-300 text-sm sm:text-base"
                                         placeholder="Ex: Apt 101, Bloco B"
                                         aria-label="Apartamento / Bloco"
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="bairro" className="block text-gray-700 text-sm font-bold mb-2">
+                                    <label htmlFor="bairro" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                                         Bairro <span className="text-red-500">*</span>
                                     </label>
                                     <input
@@ -469,7 +469,7 @@ const App = () => {
                                         name="bairro"
                                         value={formData.bairro}
                                         onChange={handleChange}
-                                        className={`shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ${errors.bairro ? 'border-red-500' : 'border-gray-300'
+                                        className={`shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 text-sm sm:text-base ${errors.bairro ? 'border-red-500' : 'border-gray-300'
                                             }`}
                                         placeholder="Nome do bairro"
                                         aria-label="Bairro"
@@ -478,9 +478,9 @@ const App = () => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                                 <div>
-                                    <label htmlFor="cidade" className="block text-gray-700 text-sm font-bold mb-2">
+                                    <label htmlFor="cidade" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                                         Cidade <span className="text-red-500">*</span>
                                     </label>
                                     <input
@@ -489,7 +489,7 @@ const App = () => {
                                         name="cidade"
                                         value={formData.cidade}
                                         onChange={handleChange}
-                                        className={`shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ${errors.cidade ? 'border-red-500' : 'border-gray-300'
+                                        className={`shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 text-sm sm:text-base ${errors.cidade ? 'border-red-500' : 'border-gray-300'
                                             }`}
                                         placeholder="Sua cidade"
                                         aria-label="Cidade"
@@ -497,7 +497,7 @@ const App = () => {
                                     {errors.cidade && <p className="text-red-500 text-xs italic mt-1">{errors.cidade}</p>}
                                 </div>
                                 <div>
-                                    <label htmlFor="estado" className="block text-gray-700 text-sm font-bold mb-2">
+                                    <label htmlFor="estado" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                                         Estado <span className="text-red-500">*</span>
                                     </label>
                                     <input
@@ -506,7 +506,7 @@ const App = () => {
                                         name="estado"
                                         value={formData.estado}
                                         onChange={handleChange}
-                                        className={`shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ${errors.estado ? 'border-red-500' : 'border-gray-300'
+                                        className={`shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 text-sm sm:text-base ${errors.estado ? 'border-red-500' : 'border-gray-300'
                                             }`}
                                         placeholder="Seu estado (Ex: SP)"
                                         aria-label="Estado"
@@ -517,7 +517,7 @@ const App = () => {
                             </div>
 
                             <div>
-                                <label htmlFor="cep" className="block text-gray-700 text-sm font-bold mb-2">
+                                <label htmlFor="cep" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                                     CEP <span className="text-red-500">*</span>
                                 </label>
                                 <input
@@ -526,7 +526,7 @@ const App = () => {
                                     name="cep"
                                     value={formData.cep}
                                     onChange={handleChange}
-                                    className={`shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ${errors.cep ? 'border-red-500' : 'border-gray-300'
+                                    className={`shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 text-sm sm:text-base ${errors.cep ? 'border-red-500' : 'border-gray-300'
                                         }`}
                                     placeholder="00000-000 (apenas números)"
                                     aria-label="CEP"
@@ -540,10 +540,10 @@ const App = () => {
                     {/* Seção Endereço Condicional - Feirinha */}
                     {formData.tipoLocal === 'feirinha' && (
                         <>
-                            <h2 className="text-2xl font-bold text-blue-700 mt-8 mb-4 border-b border-blue-200 pb-2">Dados da Feirinha</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <h2 className="text-xl sm:text-2xl font-bold text-blue-700 mt-6 sm:mt-8 mb-3 sm:mb-4 border-b border-blue-200 pb-2">Dados da Feirinha</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                                 <div>
-                                    <label htmlFor="numeroBanca" className="block text-gray-700 text-sm font-bold mb-2">
+                                    <label htmlFor="numeroBanca" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                                         Número da Banca <span className="text-red-500">*</span>
                                     </label>
                                     <input
@@ -552,7 +552,7 @@ const App = () => {
                                         name="numeroBanca"
                                         value={formData.numeroBanca}
                                         onChange={handleChange}
-                                        className={`shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ${errors.numeroBanca ? 'border-red-500' : 'border-gray-300'
+                                        className={`shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 text-sm sm:text-base ${errors.numeroBanca ? 'border-red-500' : 'border-gray-300'
                                             }`}
                                         placeholder="Número da sua banca"
                                         aria-label="Número da Banca"
@@ -560,7 +560,7 @@ const App = () => {
                                     {errors.numeroBanca && <p className="text-red-500 text-xs italic mt-1">{errors.numeroBanca}</p>}
                                 </div>
                                 <div>
-                                    <label htmlFor="corredor" className="block text-gray-700 text-sm font-bold mb-2">
+                                    <label htmlFor="corredor" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                                         Corredor <span className="text-red-500">*</span>
                                     </label>
                                     <input
@@ -569,7 +569,7 @@ const App = () => {
                                         name="corredor"
                                         value={formData.corredor}
                                         onChange={handleChange}
-                                        className={`shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ${errors.corredor ? 'border-red-500' : 'border-gray-300'
+                                        className={`shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 text-sm sm:text-base ${errors.corredor ? 'border-red-500' : 'border-gray-300'
                                             }`}
                                         placeholder="Letra do corredor (A-Z)"
                                         aria-label="Corredor"
@@ -582,9 +582,9 @@ const App = () => {
                     )}
 
                     {/* Seção Plano de Interesse */}
-                    <h2 className="text-2xl font-bold text-blue-700 mt-8 mb-4 border-b border-blue-200 pb-2">Plano Desejado</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-blue-700 mt-6 sm:mt-8 mb-3 sm:mb-4 border-b border-blue-200 pb-2">Plano Desejado</h2>
                     <div>
-                        <label htmlFor="planoInteresse" className="block text-gray-700 text-sm font-bold mb-2">
+                        <label htmlFor="planoInteresse" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                             Plano de Interesse <span className="text-red-500">*</span>
                         </label>
                         <select
@@ -592,7 +592,7 @@ const App = () => {
                             name="planoInteresse"
                             value={formData.planoInteresse}
                             onChange={handleChange}
-                            className={`shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 ${errors.planoInteresse ? 'border-red-500' : 'border-gray-300'
+                            className={`shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 text-sm sm:text-base ${errors.planoInteresse ? 'border-red-500' : 'border-gray-300'
                                 }`}
                             aria-label="Plano de Interesse"
                         >
@@ -607,9 +607,9 @@ const App = () => {
                     </div>
 
                     {/* Seção Observações */}
-                    <h2 className="text-2xl font-bold text-blue-700 mt-8 mb-4 border-b border-blue-200 pb-2">Observações</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-blue-700 mt-6 sm:mt-8 mb-3 sm:mb-4 border-b border-blue-200 pb-2">Observações</h2>
                     <div>
-                        <label htmlFor="observacoes" className="block text-gray-700 text-sm font-bold mb-2">
+                        <label htmlFor="observacoes" className="block text-gray-700 text-sm sm:text-base font-bold mb-1 sm:mb-2">
                             Observações / Dúvidas
                         </label>
                         <textarea
@@ -618,17 +618,17 @@ const App = () => {
                             value={formData.observacoes}
                             onChange={handleChange}
                             rows="4"
-                            className="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 border-gray-300"
+                            className="shadow appearance-none border rounded-lg w-full py-2 px-3 sm:py-3 sm:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200 border-gray-300 text-sm sm:text-base"
                             placeholder="Ex: Melhor horário para contato, dúvidas sobre cobertura, etc."
                             aria-label="Observações"
                         ></textarea>
                     </div>
 
                     {/* Botão de Envio */}
-                    <div className="flex justify-center mt-10">
+                    <div className="flex justify-center mt-8 sm:mt-10">
                         <button
                             type="submit"
-                            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 sm:py-4 sm:px-8 rounded-full shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 text-base sm:text-lg"
                             aria-label="Enviar Solicitação"
                         >
                             Enviar Solicitação
