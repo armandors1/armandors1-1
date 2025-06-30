@@ -47,7 +47,7 @@ const QrGeneratorTool = () => {
                 </p>
 
                 {errorMessage && (
-                    <div className="p-3 mb-4 rounded-lg text-center font-semibold bg-red-100 text-red-800 border border-red-300 text-sm">
+                    <div className="p-3 mb-4 rounded-lg text-center font-semibold bg-red-10 text-red-800 border border-red-30 text-sm">
                         {errorMessage}
                     </div>
                 )}
@@ -100,8 +100,8 @@ const QrGeneratorTool = () => {
                             </div>
 
                             <div>
-                                <label className="block text-gray-700 text-xs sm:text-sm font-bold mb-2">QR Code para Escanear:</label>
-                                <div className="mx-auto w-full p-2 bg-white border-2 border-purple-200 rounded-lg shadow-md flex justify-center items-center overflow-hidden">
+                                <label className="block text-gray-700 text-xs sm:text-sm font-bold mb-5">QR Code para Escanear:</label>
+                                <div className="mx-auto w-full p-20 bg-white border-2 border-purple-10 rounded-lg shadow-md flex justify-center items-center overflow-hidden">
                                     <QRCode
                                         value={formUrl}
                                         size={512}
