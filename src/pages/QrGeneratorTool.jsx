@@ -37,9 +37,8 @@ const QrGeneratorTool = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 flex items-center justify-center p-2 sm:p-4 md:p-8 font-inter">
-            {/* Reduced horizontal padding on mobile (px-4) */}
-            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-xl shadow-2xl w-full max-w-none sm:max-w-xl lg:max-w-3xl transform transition-all duration-300 hover:scale-[1.01] mx-auto px-4 sm:px-6 md:px-8">
+        <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 flex items-center justify-center px-2 py-6 sm:px-4 md:px-8 font-inter">
+            <div className="bg-white p-4 sm:p-6 md:p-8 rounded-xl shadow-2xl w-full max-w-screen-sm sm:max-w-xl lg:max-w-2xl mx-auto transition-transform duration-300 hover:scale-[1.01]">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center text-purple-800 mb-4 sm:mb-6 border-b-4 border-purple-300 pb-2">
                     Gerador de Link e QR Code
                 </h1>
@@ -81,7 +80,9 @@ const QrGeneratorTool = () => {
 
                     {formUrl && !errorMessage && (
                         <div className="mt-6 sm:mt-8 text-center bg-gray-50 p-4 sm:p-6 rounded-lg shadow-inner">
-                            <h2 className="text-xl sm:text-2xl font-bold text-purple-700 mb-3 sm:mb-4 border-b border-purple-200 pb-2">Seu Link e QR Code</h2>
+                            <h2 className="text-xl sm:text-2xl font-bold text-purple-700 mb-3 sm:mb-4 border-b border-purple-200 pb-2">
+                                Seu Link e QR Code
+                            </h2>
 
                             <div className="mb-5 sm:mb-6">
                                 <label className="block text-gray-700 text-xs sm:text-sm font-bold mb-2">Link para Compartilhar:</label>
@@ -100,12 +101,10 @@ const QrGeneratorTool = () => {
 
                             <div>
                                 <label className="block text-gray-700 text-xs sm:text-sm font-bold mb-2">QR Code para Escanear:</label>
-                                {/* Adjusted max-w for better mobile filling */}
                                 <div className="mx-auto w-full p-2 bg-white border-2 border-purple-200 rounded-lg shadow-md flex justify-center items-center overflow-hidden">
                                     <QRCode
                                         value={formUrl}
                                         size={512}
-                                        // Simplified max-width to allow more filling on small screens
                                         className="w-full h-auto max-w-full"
                                         level="H"
                                     />
