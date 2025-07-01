@@ -1,11 +1,14 @@
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
+import { useSolicitacoes } from "../contexts/SolicitacoesContext";
+
 
 export default function Layout() {
     const { logout, user } = useAuth();
     const navigate = useNavigate();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const { pendentes } = useSolicitacoes(); // acessa o número de solicitações pendentes
 
     async function handleLogout() {
         try {
@@ -44,7 +47,7 @@ export default function Layout() {
             <nav
                 className={`
                     ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
-                    fixed inset-y-0 left-0 z-25 w-39 bg-white shadow-md p-6 flex flex-col // <-- Mudei de w-64 para w-48
+                    fixed inset-y-0 left-0 z-25 w-39 bg-white shadow-md p-6 flex flex-col
                     transform transition-transform duration-300 ease-in-out
                     md:relative md:translate-x-0 md:flex
                 `}
@@ -108,16 +111,33 @@ export default function Layout() {
                     🌐 Solicitar Internet
                 </NavLink>
                 <NavLink
+                    to="/solicitacoes"
+                    className={({ isActive }) =>
+                        `flex items-center justify-between mb-2 px-4 py-2 rounded-lg transition-colors duration-150 
+        ${isActive ? 'bg-green-600 text-white' : 'text-gray-700 hover:bg-green-100'}`
+                    }
+                    onClick={() => setIsSidebarOpen(false)}
+                >
+                    <span className="flex items-center gap-2">
+                        ✅ <span>Solicitações</span>
+                    </span>
+                    {pendentes > 0 && (
+                        <span className="ml-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full">
+                            {pendentes}
+                        </span>
+                    )}
+                </NavLink>
+
+
+                <NavLink
                     to="/gerar-link"
                     className={({ isActive }) =>
                         "mb-4 px-3 py-2 rounded " +
                         (isActive ? "bg-purple-600 text-white" : "text-gray-700 hover:bg-purple-100")
                     }
                 >
-                    📎 Gerar Link/QR
+                    📌 Gerar Link/QR
                 </NavLink>
-
-
 
                 <button
                     onClick={handleLogout}

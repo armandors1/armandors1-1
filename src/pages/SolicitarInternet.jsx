@@ -212,7 +212,8 @@ const App = () => {
                 // Isso garante que as solicitações de "feirinha" e "residência" sejam salvas em coleções separadas.
                 const colecaoBase = formData.tipoLocal === 'feirinha' ? 'feirinha-clientes' : 'residencia-clientes';
                 // Constrói o caminho completo da coleção de acordo com as regras do Canvas
-                const fullCollectionPath = `artifacts/${appId}/public/data/${colecaoBase}`;
+                const fullCollectionPath = "solicitacoes-clientes";
+
 
                 // Dados a serem salvos no Firestore
                 await addDoc(collection(db, fullCollectionPath), {

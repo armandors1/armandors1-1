@@ -11,6 +11,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import BuscaClientes from "./pages/BuscaClientes";
 import SolicitarInternet from './pages/SolicitarInternet';
 import QrGeneratorTool from './pages/QrGeneratorTool';
+import Solicitacoes from './pages/Solicitacoes';
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
             <Route path="residencia" element={<Residencia />} />
             <Route path="cadastro" element={<Cadastro />} />
             <Route path="buscar-clientes" element={<BuscaClientes />} />
+            <Route path="/solicitacoes" element={<Solicitacoes />} />
           </Route>
         </Routes>
       </Router>
