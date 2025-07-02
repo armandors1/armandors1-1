@@ -46,16 +46,16 @@ export default function Login() {
 
                 <label className="block mb-2 font-semibold" htmlFor="senha">
                     Senha
+                    <input
+                        id="senha"
+                        type="password"
+                        placeholder="Digite sua senha"
+                        className="w-full p-2 mb-6 border border-gray-300 rounded"
+                        value={senha}
+                        onChange={(e) => setSenha(e.target.value)}
+                        autoComplete="current-password"
+                    />
                 </label>
-                <input
-                    id="senha"
-                    type="password"
-                    placeholder="Digite sua senha"
-                    className="w-full p-2 mb-6 border border-gray-300 rounded"
-                    value={senha}
-                    onChange={(e) => setSenha(e.target.value)}
-                />
-
                 <button
                     type="submit"
                     className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition"
