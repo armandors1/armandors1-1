@@ -3,20 +3,17 @@ import { collection, onSnapshot, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 
-// This function would ideally interact with a real WhatsApp API or service.
 async function enviarMensagemWhatsApp(numero, mensagem) {
     console.log(`Mensagem para ${numero}: ${mensagem}`);
+    // Aqui você pode colocar a integração real com WhatsApp
+    // Ex: window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`, '_blank');
 }
 
 export default function Solicitacoes() {
     const [solicitacoes, setSolicitacoes] = useState([]);
-    // State to keep track of the number of new solicitations for notification
-    const [newSolicitacoesCount, setNewSolicitacoesCount] = useState(0);
     const navigate = useNavigate();
-    const solicitacoesRef = collection(db, "solicitacoes-clientes");
 
     useEffect(() => {
-        // Authenticate user
         const unsubscribeAuth = auth.onAuthStateChanged((user) => {
             if (!user) {
                 navigate("/login");
@@ -24,19 +21,9 @@ export default function Solicitacoes() {
         });
 
         if (auth.currentUser) {
+            const solicitacoesRef = collection(db, "solicitacoes-clientes");
             const unsubscribeSnapshot = onSnapshot(solicitacoesRef, (snapshot) => {
                 const lista = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-
-                // Calculate new solicitations for notification
-                // This assumes 'solicitacoes' holds the previous state.
-                // You might need a more robust way to track "new" if you have
-                // other ways requests are removed/added.
-                if (solicitacoes.length < lista.length) {
-                    setNewSolicitacoesCount(lista.length - solicitacoes.length);
-                } else {
-                    setNewSolicitacoesCount(0); // Reset if fewer or same number
-                }
-
                 setSolicitacoes(lista);
             });
 
@@ -47,18 +34,21 @@ export default function Solicitacoes() {
         }
 
         return () => unsubscribeAuth();
-    }, [navigate, solicitacoesRef, solicitacoes.length]); // Added solicitacoes.length to dependency array
+    }, [navigate]);
 
     async function aprovarSolicitacao(solicitacao) {
         try {
             await deleteDoc(doc(db, "solicitacoes-clientes", solicitacao.id));
+            const numero = (solicitacao.telefone || solicitacao.contato || '').replace(/\D/g, ""); // Usar telefone primeiro, depois contato
+            const nomeCliente = solicitacao.nomeCompleto || solicitacao.nome || "Cliente"; // Usar nomeCompleto primeiro, depois nome
+            const mensagem = `Olá ${nomeCliente}, sua solicitação foi aprovada! Em breve entraremos em contato para agendar a instalação.`;
 
-            const numero = solicitacao.contato.replace(/\D/g, "");
-            const mensagem = `Olá ${solicitacao.nome}, sua solicitação foi aprovada!`;
-
-            await enviarMensagemWhatsApp(numero, mensagem);
-
-            // No need to update locally, onSnapshot handles it automatically
+            if (numero) {
+                await enviarMensagemWhatsApp(numero, mensagem);
+                alert("Solicitação aprovada e mensagem enviada!");
+            } else {
+                alert("Solicitação aprovada, mas não foi possível enviar mensagem: número de contato não encontrado.");
+            }
         } catch (error) {
             console.error("Erro ao aprovar solicitação:", error);
             alert("Erro ao aprovar solicitação.");
@@ -67,50 +57,134 @@ export default function Solicitacoes() {
 
     return (
         <div className="p-4 max-w-4xl mx-auto">
-            {/* Notification Banner */}
-            {newSolicitacoesCount > 0 && (
-                <div className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4" role="alert">
-                    <p className="font-bold">Nova(s) Solicitação(ões)!</p>
-                    <p>Você tem {newSolicitacoesCount} nova(s) solicitação(ões) de internet aguardando.</p>
-                </div>
-            )}
-
-            <h1 className="text-xl font-bold mb-4">
+            <h1 className="text-2xl font-bold mb-4 text-gray-800">
                 Solicitações de Internet ({solicitacoes.length})
             </h1>
 
             {solicitacoes.length === 0 ? (
-                <p>Nenhuma solicitação encontrada.</p>
+                <p className="text-gray-600 mt-4">Nenhuma solicitação encontrada.</p>
             ) : (
-                <table className="w-full text-sm border border-gray-300">
-                    <thead className="bg-gray-100">
-                        <tr>
-                            <th className="px-4 py-2 border">Nome</th>
-                            <th className="px-4 py-2 border">Contato</th>
-                            <th className="px-4 py-2 border">Status</th>
-                            <th className="px-4 py-2 border text-center">Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {solicitacoes.map((solicitacao) => (
-                            <tr key={solicitacao.id} className="text-center">
-                                <td className="px-4 py-2 border">{solicitacao.nome}</td>
-                                <td className="px-4 py-2 border">{solicitacao.contato}</td>
-                                <td className="px-4 py-2 border capitalize">
-                                    {solicitacao.status || "pendente"}
-                                </td>
-                                <td className="px-4 py-2 border">
-                                    <button
-                                        onClick={() => aprovarSolicitacao(solicitacao)}
-                                        className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
-                                    >
-                                        Aprovar
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <>
+                    {/* Tabela Feirinha */}
+                    {solicitacoes.some((s) => s.local === "feirinha") && (
+                        <>
+                            <h2 className="text-xl font-bold mt-8 mb-4 text-blue-700">Feirinha</h2>
+                            <table className="w-full text-sm border-collapse border border-gray-300 shadow-sm rounded-lg overflow-hidden">
+                                <thead className="bg-blue-100 text-blue-800">
+                                    <tr>
+                                        <th className="px-3 py-2 border text-left">Nome</th>
+                                        <th className="px-3 py-2 border">CPF</th>
+                                        <th className="px-3 py-2 border">Contato</th>
+                                        <th className="px-3 py-2 border">Plano</th>
+                                        <th className="px-3 py-2 border">Status</th>
+                                        <th className="px-3 py-2 border">Corredor</th>
+                                        <th className="px-3 py-2 border">Nº Banca</th>
+                                        {/* NOVA COLUNA ADICIONADA AQUI */}
+                                        <th className="px-3 py-2 border text-left">observacoes</th>
+                                        <th className="px-3 py-2 border text-center">Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {solicitacoes
+                                        .filter((s) => s.local === "feirinha")
+                                        .map((s) => (
+                                            <tr key={s.id} className="even:bg-gray-50 hover:bg-gray-100 transition-colors duration-150">
+                                                <td className="px-3 py-2 border text-left font-medium text-gray-900">
+                                                    {s.nomeCompleto || s.nome || "N/A"}
+                                                </td>
+                                                <td className="px-3 py-2 border text-center text-gray-700">{s.cpf || "N/A"}</td>
+                                                <td className="px-3 py-2 border text-center text-gray-700">{s.telefone || s.contato || "N/A"}</td>
+                                                <td className="px-3 py-2 border text-center text-gray-700">{s.planoInteresse || s.plano || "N/A"}</td>
+                                                <td className="px-3 py-2 border text-center capitalize">
+                                                    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${s.status === "aprovado" ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800"
+                                                        }`}>
+                                                        {s.status || "Pendente"}
+                                                    </span>
+                                                </td>
+                                                <td className="px-3 py-2 border text-center text-gray-700">{s.corredor || "—"}</td>
+                                                <td className="px-3 py-2 border text-center text-gray-700">{s.numeroBanca || "—"}</td>
+                                                {/* CÉLULA PARA OBSERVAÇÕES */}
+                                                <td className="px-5 py-2 border text-left text-gray-700">
+                                                    {s.observacoes || "—"}
+                                                </td>
+                                                <td className="px-3 py-2 border text-center">
+                                                    <button
+                                                        onClick={() => aprovarSolicitacao(s)}
+                                                        className="px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200"
+                                                    >
+                                                        Aprovar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                </tbody>
+                            </table>
+                        </>
+                    )}
+
+                    {/* Tabela Residência */}
+                    {solicitacoes.some((s) => s.local === "residencia") && (
+                        <>
+                            <h2 className="text-xl font-bold mt-8 mb-4 text-blue-700">Residência</h2>
+                            <table className="w-full text-sm border-collapse border border-gray-300 shadow-sm rounded-lg overflow-hidden">
+                                <thead className="bg-blue-100 text-blue-800">
+                                    <tr>
+                                        <th className="px-3 py-2 border text-left">Nome</th>
+                                        <th className="px-3 py-2 border">CPF</th>
+                                        <th className="px-3 py-2 border">Contato</th>
+                                        <th className="px-3 py-2 border">Plano</th>
+                                        <th className="px-3 py-2 border">observacoes</th>
+                                        <th className="px-3 py-2 border text-left">Endereço</th>
+                                        <th className="px-3 py-2 border text-left">Cidade/UF</th>
+                                        {/* AQUI VOCÊ TAMBÉM PODE ADICIONAR OBSERVAÇÕES SE FOR RELEVANTE PARA RESIDÊNCIAS */}
+                                        {/* <th className="px-3 py-2 border text-left">Obs.</th> */}
+                                        <th className="px-3 py-2 border text-center">Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {solicitacoes
+                                        .filter((s) => s.local === "residencia")
+                                        .map((s) => (
+                                            <tr key={s.id} className="even:bg-gray-50 hover:bg-gray-100 transition-colors duration-150">
+                                                <td className="px-3 py-2 border text-left font-medium text-gray-900">
+                                                    {s.nomeCompleto || s.nome || "N/A"}
+                                                </td>
+                                                <td className="px-3 py-2 border text-center text-gray-700">{s.cpf || "N/A"}</td>
+                                                <td className="px-3 py-2 border text-center text-gray-700">{s.telefone || s.contato || "N/A"}</td>
+                                                <td className="px-3 py-2 border text-center text-gray-700">{s.planoInteresse || s.plano || "N/A"}</td>
+                                                <td className="px-5 py-2 border text-left text-gray-700">
+                                                    {s.observacoes || "—"}
+                                                </td>
+
+                                                <td className="px-3 py-2 border text-left text-gray-700">
+                                                    {`${s.rua || ''}${s.numero ? `, ${s.numero}` : ''}`}
+                                                    {(s.rua || s.numero) && s.bairro ? <br /> : ''}
+                                                    {s.bairro || ''}
+                                                    {(s.complemento && (s.rua || s.numero || s.bairro)) ? <br /> : ''}
+                                                    {s.complemento ? `(Comp: ${s.complemento})` : ''}
+                                                </td>
+                                                <td className="px-3 py-2 border text-left text-gray-700">
+                                                    {`${s.cidade || ''}${s.estado ? ` - ${s.estado}` : ''}` || "N/A"}
+                                                </td>
+                                                {/* CÉLULA PARA OBSERVAÇÕES (se decidir adicionar) */}
+                                                {/* <td className="px-3 py-2 border text-left text-gray-700">
+                                                    {s.observacoes || "—"}
+                                                </td> */}
+                                                <td className="px-3 py-2 border text-center">
+                                                    <button
+                                                        onClick={() => aprovarSolicitacao(s)}
+                                                        className="px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200"
+                                                    >
+                                                        Aprovar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                </tbody>
+                            </table>
+                        </>
+                    )}
+                </>
             )}
         </div>
     );

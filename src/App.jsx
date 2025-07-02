@@ -11,7 +11,8 @@ import { AuthProvider } from "./contexts/AuthContext";
 import BuscaClientes from "./pages/BuscaClientes";
 import SolicitarInternet from './pages/SolicitarInternet';
 import QrGeneratorTool from './pages/QrGeneratorTool';
-import Solicitacoes from './pages/Solicitacoes';
+import Solicitacoes from "./pages/Solicitacoes";
+
 
 function App() {
   return (
