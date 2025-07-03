@@ -13,11 +13,26 @@ export default function Login() {
         e.preventDefault();
         setErro("");
 
+        if (!email || !senha) {
+            setErro("Por favor, preencha email e senha.");
+            return;
+        }
+
         try {
             await signInWithEmailAndPassword(auth, email, senha);
             navigate("/"); // redireciona para a home/dashboard
         } catch (error) {
-            setErro("Usuário ou senha inválidos");
+            // Tratamento de erro mais detalhado
+            if (
+                error.code === "auth/user-not-found" ||
+                error.code === "auth/wrong-password"
+            ) {
+                setErro("Usuário ou senha inválidos");
+            } else if (error.code === "auth/too-many-requests") {
+                setErro("Muitas tentativas. Tente novamente mais tarde.");
+            } else {
+                setErro("Erro: " + error.message);
+            }
         }
     }
 
@@ -28,9 +43,7 @@ export default function Login() {
                 onSubmit={handleSubmit}
                 className="bg-white p-6 rounded shadow-md w-full max-w-sm"
             >
-                {erro && (
-                    <p className="mb-4 text-red-600 font-semibold">{erro}</p>
-                )}
+                {erro && <p className="mb-4 text-red-600 font-semibold">{erro}</p>}
 
                 <label className="block mb-2 font-semibold" htmlFor="email">
                     Email
@@ -42,20 +55,24 @@ export default function Login() {
                     className="w-full p-2 mb-4 border border-gray-300 rounded"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="email"
+                    required
                 />
 
                 <label className="block mb-2 font-semibold" htmlFor="senha">
                     Senha
-                    <input
-                        id="senha"
-                        type="password"
-                        placeholder="Digite sua senha"
-                        className="w-full p-2 mb-6 border border-gray-300 rounded"
-                        value={senha}
-                        onChange={(e) => setSenha(e.target.value)}
-                        autoComplete="current-password"
-                    />
                 </label>
+                <input
+                    id="senha"
+                    type="password"
+                    placeholder="Digite sua senha"
+                    className="w-full p-2 mb-6 border border-gray-300 rounded"
+                    value={senha}
+                    onChange={(e) => setSenha(e.target.value)}
+                    autoComplete="current-password"
+                    required
+                />
+
                 <button
                     type="submit"
                     className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition"

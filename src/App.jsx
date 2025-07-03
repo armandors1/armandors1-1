@@ -5,7 +5,7 @@ import Feirinha from "./pages/Feirinha";
 import Residencia from "./pages/Residencia";
 import Cadastro from "./pages/Cadastro";
 import EditarCliente from "./pages/EditarCliente";
-import Login from "./pages/Login";
+import Login from './pages/Login';
 import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import BuscaClientes from "./pages/BuscaClientes";
@@ -56,6 +56,7 @@ function App() {
             <Route path="cadastro" element={<Cadastro />} />
             <Route path="buscar-clientes" element={<BuscaClientes />} />
             <Route path="/solicitacoes" element={<Solicitacoes />} />
+            <Route path="/login" element={<Login />} />
           </Route>
         </Routes>
       </Router>

@@ -1,53 +1,32 @@
-// Exemplo de Login.jsx
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext'; // Caminho para seu AuthContext
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { auth } from "../firebaseConfig";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
-export default function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const { login } = useAuth();
-    const navigate = useNavigate();
+const AuthContext = createContext();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault(); // Impede o recarregamento da página
+export function AuthProvider({ children }) {
+    const [usuario, setUsuario] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-        setError(''); // Limpa erros anteriores
-        const result = await login(email, password); // Chama a nova função login
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setUsuario(user);
+            setLoading(false);
+        });
+        return unsubscribe;
+    }, []);
 
-        if (result.success) {
-            navigate('/dashboard'); // Redireciona para o dashboard após login
-        } else {
-            setError(result.message); // Exibe a mensagem de erro da API
-        }
-    };
+    function logout() {
+        return signOut(auth);
+    }
 
     return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Senha:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Entrar</button>
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-            </form>
-        </div>
+        <AuthContext.Provider value={{ usuario, logout }}>
+            {!loading && children}
+        </AuthContext.Provider>
     );
+}
+
+export function useAuth() {
+    return useContext(AuthContext);
 }
