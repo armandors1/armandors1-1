@@ -131,7 +131,7 @@ export default function Solicitacoes() {
                                     <tr>
                                         <th className="px-3 py-2 border text-left">Nome</th>
                                         <th className="px-3 py-2 border">CPF</th>
-                                        <th className="px-3 py-2 border">armando</th>
+                                        <th className="px-3 py-2 border">Contato</th>
                                         <th className="px-3 py-2 border">Plano</th>
                                         <th className="px-3 py-2 border">observacoes</th>
                                         <th className="px-3 py-2 border text-left">Endereço</th>
