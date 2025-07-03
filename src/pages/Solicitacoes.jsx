@@ -190,6 +190,4 @@ export default function Solicitacoes() {
     );
 }
 
-<hi>armando </hi>
-
 // This code is a React component that displays a list of internet service requests.
