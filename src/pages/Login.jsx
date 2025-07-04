@@ -22,7 +22,6 @@ export default function Login() {
             await signInWithEmailAndPassword(auth, email, senha);
             navigate("/"); // redireciona para a home/dashboard
         } catch (error) {
-            // Tratamento de erro mais detalhado
             if (
                 error.code === "auth/user-not-found" ||
                 error.code === "auth/wrong-password"
@@ -37,49 +36,57 @@ export default function Login() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-            <h1 className="text-4xl font-bold mb-4 text-blue-700">Seja bem-vindo!</h1>
-            <form
-                onSubmit={handleSubmit}
-                className="bg-white p-6 rounded shadow-md w-full max-w-sm"
-            >
-                {erro && <p className="mb-4 text-red-600 font-semibold">{erro}</p>}
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 px-4 py-8">
+            <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-6 sm:p-8">
+                <h1 className="text-3xl sm:text-4xl font-bold text-center text-blue-700 mb-6">
+                    Seja bem-vindo!
+                </h1>
 
-                <label className="block mb-2 font-semibold" htmlFor="email">
-                    Email
-                </label>
-                <input
-                    id="email"
-                    type="email"
-                    placeholder="Digite seu email"
-                    className="w-full p-2 mb-4 border border-gray-300 rounded"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    autoComplete="email"
-                    required
-                />
+                {erro && (
+                    <p className="mb-4 text-red-600 font-semibold text-center">{erro}</p>
+                )}
 
-                <label className="block mb-2 font-semibold" htmlFor="senha">
-                    Senha
-                </label>
-                <input
-                    id="senha"
-                    type="password"
-                    placeholder="Digite sua senha"
-                    className="w-full p-2 mb-6 border border-gray-300 rounded"
-                    value={senha}
-                    onChange={(e) => setSenha(e.target.value)}
-                    autoComplete="current-password"
-                    required
-                />
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                        <label className="block mb-1 font-semibold text-gray-700" htmlFor="email">
+                            Email
+                        </label>
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="Digite seu email"
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            autoComplete="email"
+                            required
+                        />
+                    </div>
 
-                <button
-                    type="submit"
-                    className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition"
-                >
-                    Entrar
-                </button>
-            </form>
+                    <div>
+                        <label className="block mb-1 font-semibold text-gray-700" htmlFor="senha">
+                            Senha
+                        </label>
+                        <input
+                            id="senha"
+                            type="password"
+                            placeholder="Digite sua senha"
+                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                            value={senha}
+                            onChange={(e) => setSenha(e.target.value)}
+                            autoComplete="current-password"
+                            required
+                        />
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition"
+                    >
+                        Entrar
+                    </button>
+                </form>
+            </div>
         </div>
     );
 }
