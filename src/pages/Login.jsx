@@ -20,7 +20,7 @@ export default function Login() {
 
         try {
             await signInWithEmailAndPassword(auth, email, senha);
-            navigate("/"); // redireciona para a home/dashboard
+            navigate("/");
         } catch (error) {
             if (
                 error.code === "auth/user-not-found" ||
@@ -36,9 +36,9 @@ export default function Login() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 px-4 py-8">
-            <div className="w-full max-w-sm bg-white shadow-xl rounded-xl p-6">
-                <h1 className="text-2xl font-bold text-center text-blue-700 mb-6">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 px-6 py-10">
+            <div className="w-full max-w-md sm:max-w-lg bg-white shadow-xl rounded-xl p-6 sm:p-15">
+                <h1 className="text-2xl sm:text-3xl font-bold text-center text-blue-700 mb-6">
                     Seja bem-vindo!
                 </h1>
 
