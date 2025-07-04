@@ -36,8 +36,8 @@ export default function Login() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 px-6 py-10">
-            <div className="w-full max-w-md sm:max-w-lg bg-white shadow-xl rounded-xl p-6 sm:p-15">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 p-4 sm:px-6 sm:py-10"> {/* Adjusted padding */}
+            <div className="w-full max-w-sm sm:max-w-lg bg-white shadow-xl rounded-xl p-6 sm:p-10 md:p-12"> {/* Adjusted max-w and padding */}
                 <h1 className="text-2xl sm:text-3xl font-bold text-center text-blue-700 mb-6">
                     Seja bem-vindo!
                 </h1>
