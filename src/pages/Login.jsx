@@ -37,8 +37,8 @@ export default function Login() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 px-4 py-8">
-            <div className="w-full max-w-md bg-white shadow-lg rounded-xl p-6 sm:p-8">
-                <h1 className="text-3xl sm:text-4xl font-bold text-center text-blue-700 mb-6">
+            <div className="w-full max-w-sm bg-white shadow-xl rounded-xl p-6">
+                <h1 className="text-2xl font-bold text-center text-blue-700 mb-6">
                     Seja bem-vindo!
                 </h1>
 
@@ -55,7 +55,7 @@ export default function Login() {
                             id="email"
                             type="email"
                             placeholder="Digite seu email"
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                            className="w-full p-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             autoComplete="email"
@@ -71,7 +71,7 @@ export default function Login() {
                             id="senha"
                             type="password"
                             placeholder="Digite sua senha"
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                            className="w-full p-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
                             value={senha}
                             onChange={(e) => setSenha(e.target.value)}
                             autoComplete="current-password"
@@ -81,7 +81,7 @@ export default function Login() {
 
                     <button
                         type="submit"
-                        className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition"
+                        className="w-full bg-blue-600 text-white p-3 text-lg rounded-lg hover:bg-blue-700 transition"
                     >
                         Entrar
                     </button>
